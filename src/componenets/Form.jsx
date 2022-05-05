@@ -1,7 +1,9 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef } from 'react'
 import { Store } from './StoreProvider'
 
 const Form = () => {
+
+    const formRef = useRef(null)
   
     const {state, dispatch} = useContext(Store)
 
@@ -15,6 +17,7 @@ const Form = () => {
                     message
                 }
             })
+            formRef.current.reset()
         }
     }
   
@@ -31,7 +34,7 @@ const Form = () => {
 
 
  return (
-    <form>
+    <form ref={formRef}>
         <label>Title</label>
         <input type="text" name='title' onChange={addTitle}/>
         <label>Message</label>
