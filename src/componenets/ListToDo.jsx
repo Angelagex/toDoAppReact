@@ -14,6 +14,14 @@ const ListToDo = () => {
       })
     }
 
+
+    const onDelete = (note) => {
+      dispatch({
+        type: "remove-note",
+        payload: note
+      })
+    }
+
   return (
    <>
     <h1>Actions pending to be done</h1>
@@ -23,6 +31,7 @@ const ListToDo = () => {
           {note.title} <br />
           {note.message} <br />
           <input type="checkbox" checked={note.done} onChange={(e) => {onCheckbox(e, note)}} />
+          <button onClick={(e) => onDelete(note)}>Delete</button>
         </li>
       ))}
     </div>
