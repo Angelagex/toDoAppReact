@@ -1,5 +1,12 @@
 function reducer(state, action){
     switch(action.type){
+
+        case "get-notes":
+            const stateWithAllNotes = {
+                ...state,
+                listOfNotes: action.payload
+            }
+            return stateWithAllNotes        
         case "add-note":
             const newNote = {
                 id: Math.floor(Math.random() * 100),
