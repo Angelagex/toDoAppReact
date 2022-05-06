@@ -7,15 +7,29 @@ const Form = () => {
   
     const {state, dispatch} = useContext(Store)
 
-    const onAdd = (e) => {
+
+    const onAdd = async (e) => {
         e.preventDefault()
+
         if(title && message){
+            const noteFromForm = {
+                title,
+                message,
+                done: false
+            }
+            let notSavedPromise = await fetch("http://localhost:8081/api/save/note",{
+                method: "POST",
+                headers: {
+                    "Content-type": "application/json"
+                },
+                body: JSON.stringify(noteFromForm)
+            })
+
+            let notSaved = await notSavedPromise.json()
+
             dispatch({
                 type: "add-note",
-                payload: {
-                    title,
-                    message
-                }
+                payload: notSaved
             })
             formRef.current.reset()
         }
